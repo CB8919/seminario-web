@@ -1,4 +1,6 @@
-
+from django.contrib.auth import logout
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 import requests
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
@@ -107,3 +109,12 @@ def quitar_favorito(request, anime_id):
     if request.method == 'POST':
         Favorito.objects.filter(user = request.user, anime_id = anime_id).delete()
     return redirect('favoritos')
+
+
+@csrf_exempt
+def cerrar_sesion_navegador(request):
+    if request.method == 'POST':
+        logout(request)
+        return JsonResponse({'ok': True})
+
+    return JsonResponse({'ok': False}, status=405)

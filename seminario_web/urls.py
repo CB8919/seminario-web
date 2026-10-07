@@ -7,6 +7,7 @@ urlpatterns = [
     path('favoritos/agregar/', views.agregra_favorito, name = 'agregar_favorito'),
     path('favoritos/', views.mis_favoritos, name = 'favoritos'),
     path('favoritos/quitar/<int:anime_id>/', views.quitar_favorito, name = 'quitar_favorito'),
+    path('cerrar-sesion-navegador/', views.cerrar_sesion_navegador, name='cerrar_sesion_navegador'),
     
     
 ]
