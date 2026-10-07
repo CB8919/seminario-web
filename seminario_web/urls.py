@@ -8,4 +8,5 @@ urlpatterns = [
     path('favoritos/', views.mis_favoritos, name = 'favoritos'),
     path('favoritos/quitar/<int:anime_id>/', views.quitar_favorito, name = 'quitar_favorito'),
     
+    
 ]

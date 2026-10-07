@@ -1,7 +1,43 @@
-<h1>Registro</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Crear cuenta</button>
-</form>
-<p>¿Ya tenés cuenta? <a href="{% url 'login' %}">Ingresá acá</a></p>
+{% extends 'base.html' %}
+
+{% block titulo %}Crear cuenta | AnimeWeb{% endblock %}
+
+{% block contenido %}
+
+<section class="form-page">
+
+    <div class="form-card">
+
+        <h1>Crear cuenta</h1>
+
+        <form
+            class="formulario"
+            method="post"
+        >
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button
+                class="btn btn-principal"
+                type="submit"
+            >
+                Crear cuenta
+            </button>
+
+        </form>
+
+
+        <p>
+            ¿Ya tenés cuenta?
+            <a href="{% url 'login' %}">
+                Ingresá acá
+            </a>
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}
