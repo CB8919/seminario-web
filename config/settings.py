@@ -135,3 +135,7 @@ MAILERS = {
 LOGIN_REDIRECT_URL = 'inicio'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
+
+# Cierre automático de sesión
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
