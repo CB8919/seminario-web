@@ -1,0 +1,35 @@
+<h1>Inicio</h1>
+
+{% if user.is_authenticated %}
+  <p>Hola, {{ user.username }}</p>
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Cerrar sesión</button>
+    <p><a href="{% url 'favoritos' %}">Mis favoritos</a></p>
+  </form>
+
+  <h2>Animes en emisión</h2>
+  {% if error %}
+    <p>{{ error }}</p>
+  {% endif %}
+
+  <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    {% for anime in animes %}
+      <div style="width: 180px;">
+        <img src="{{ anime.coverImage.large }}" alt="{{ anime.title.romaji }}" width="180">
+        <h3>{{ anime.title.romaji }}</h3>
+        <p>Episodios: {{ anime.episodes|default:"En emisión" }}</p>
+        <form method="post" action="{% url 'agregar_favorito' %}">
+          {% csrf_token %}
+          <input type="hidden" name="anime_id" value="{{ anime.id }}">
+          <input type="hidden" name="titulo" value="{{ anime.title.romaji }}">
+          <input type="hidden" name="imagen" value="{{ anime.coverImage.large }}">
+          <button type="submit">Agregar a favoritos</button>
+        </form>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <a href="{% url 'login' %}">Ingresar</a> |
+  <a href="{% url 'registro' %}">Registrarse</a>
+{% endif %}

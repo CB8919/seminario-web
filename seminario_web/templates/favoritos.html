@@ -1,0 +1,17 @@
+<h1>Mis favoritos</h1>
+<p><a href="{% url 'inicio' %}">Volver al inicio</a></p>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+  {% for fav in favoritos %}
+    <div style="width: 180px;">
+      <img src="{{ fav.imagen }}" alt="{{ fav.titulo }}" width="180">
+      <h3>{{ fav.titulo }}</h3>
+        <form method="post" action="{% url 'quitar_favorito' fav.anime_id %}">
+        {% csrf_token %}
+            <button type="submit">Quitar</button>
+        </form>
+    </div>
+  {% empty %}
+    <p>Todavía no agregaste ningún favorito.</p>
+  {% endfor %}
+</div>
