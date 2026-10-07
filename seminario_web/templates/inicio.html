@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block titulo %}Inicio | AnimeWeb{% endblock %}
 
 {% block contenido %}
@@ -44,6 +46,10 @@
                                 {{ anime.episodes|default:"En emisión" }}
                             </p>
 
+                            <p class="anime-sinopsis" hidden>
+                                {{ anime.description|default:"Sin sinopsis disponible." }}
+                            </p>
+
                             <form
                                 method="post"
                                 action="{% url 'agregar_favorito' %}"
@@ -75,9 +81,18 @@
                                     Agregar a favoritos
                                 </button>
 
+                                <button
+                                    type="button"
+                                    class="btn btn-secundario btn-sinopsis"
+                                >
+                                    Sinopsis
+                                </button>
+
                             </form>
 
                         </div>
+
+                        
 
                     </article>
 
@@ -89,21 +104,47 @@
 
             </div>
 
+                <!-- SE PONE EL MODAL ACÁ (FUERA DE LA GRILLA Y DE LAS TARJETAS) -->
+            {% for anime in animes %}
+                <div class="modal-sinopsis modal-anime-{{ anime.id }}" hidden>
+
+                    <div class="modal-contenido">
+
+                        <button
+                            type="button"
+                            class="modal-cerrar"
+                        >
+                            ×
+                        </button>
+
+                        <h2 class="modal-titulo">
+                            {{ anime.title.romaji }}
+                        </h2>
+
+                        <p class="modal-texto">
+                            {{ anime.description|default:"Sin sinopsis disponible."|safe }}
+                        </p>
+
+                    </div>
+
+                </div>
+            {% endfor %}
+
             <div class="paginacion">
 
-    {% if pagina > 1 %}
-        <a href="?pagina={{ pagina|add:'-1' }}" class="btn btn-secundario">
-            ← Anterior
-        </a>
-    {% endif %}
+                {% if pagina > 1 %}
+                    <a href="?pagina={{ pagina|add:'-1' }}" class="btn btn-secundario">
+                        ← Anterior
+                    </a>
+                {% endif %}
 
-    <span>Página {{ pagina }}</span>
+                <span>Página {{ pagina }}</span>
 
-    <a href="?pagina={{ pagina|add:'1' }}" class="btn btn-principal">
-        Siguiente →
-    </a>
+                <a href="?pagina={{ pagina|add:'1' }}" class="btn btn-principal">
+                    Siguiente →
+                </a>
 
-</div>
+            </div>
 
         </section>
 
@@ -178,5 +219,7 @@
         </section>
 
     {% endif %}
+
+    <script src="{% static 'inicio.js' %}"></script>
 
 {% endblock %}

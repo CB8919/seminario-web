@@ -40,6 +40,7 @@ def obtener_animes(page=1):
             large
           }
           episodes
+          description(asHtml: false)
         }
       }
     }
