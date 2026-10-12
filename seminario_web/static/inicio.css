@@ -367,13 +367,12 @@ a {
 
 .anime-tarjeta {
     overflow: hidden;
-
     background: #181a31;
-
     border: 1px solid #2b2d4c;
-
     border-radius: 12px;
-
+    display: flex;             /* Agregado */
+    flex-direction: column;    /* Agregado */
+    height: 100%;              /* Agregado */
     transition:
         transform 0.2s,
         box-shadow 0.2s,
@@ -403,6 +402,9 @@ a {
 
 .anime-info {
     padding: 14px;
+    display: flex;             /* Agregado */
+    flex-direction: column;    /* Agregado */
+    flex-grow: 1;              /* Agregado: ocupa todo el alto sobrante */
 }
 
 
@@ -414,7 +416,7 @@ a {
     margin-bottom: 8px;
 
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    /*-webkit-line-clamp: 2;*/
     -webkit-box-orient: vertical;
 
     overflow: hidden;
@@ -431,7 +433,7 @@ a {
 
 
 .anime-info form {
-    margin: 0;
+    margin-top: auto;          /* Agregado: empuja el formulario/botones al fondo */
 }
 
 
