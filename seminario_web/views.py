@@ -3,7 +3,6 @@ import re
 
 from django.contrib.auth import logout
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 import requests
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
@@ -136,7 +135,8 @@ def quitar_favorito(request, anime_id):
     return redirect('favoritos')
 
 
-@csrf_exempt
+@require_POST
+@login_required
 def cerrar_sesion_navegador(request):
     if request.method == 'POST':
         logout(request)
