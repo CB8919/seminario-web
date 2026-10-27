@@ -136,5 +136,8 @@ LOGIN_REDIRECT_URL = 'inicio'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
 
-# Cierre automático de sesión
-#SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# La cookie se elimina al cerrar el navegador y la sesión vence tras 10 minutos
+# sin solicitudes; cada solicitud renueva su expiración.
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 10 * 60
+SESSION_SAVE_EVERY_REQUEST = True
