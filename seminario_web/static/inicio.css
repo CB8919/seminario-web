@@ -558,6 +558,7 @@ a {
     margin: 0;
     color: #c9c9d8;
     line-height: 1.6;
+    white-space: pre-line;
 }
 
 .modal-cerrar {
@@ -785,5 +786,100 @@ a {
     .btn-eliminar-usuario {
         padding: 7px 10px;
         font-size: 13px;
+    }
+}
+
+/* Formulario de consultas */
+.formulario-consulta {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #1e293b;
+    color: #f1f5f9;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.formulario-consulta h1 {
+    margin-bottom: 10px;
+    color: #9b8cff;
+    text-align: center;
+}
+
+.formulario-consulta p {
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.formulario-consulta form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.formulario-consulta label {
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.formulario-consulta select,
+.formulario-consulta textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: #0f172a;
+    color: #f1f5f9;
+    border: 1px solid #475569;
+    border-radius: 6px;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+.formulario-consulta select:focus,
+.formulario-consulta textarea:focus {
+    outline: 2px solid #22d3ee;
+    border-color: #22d3ee;
+}
+
+.formulario-consulta textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+.formulario-consulta button {
+    margin-top: 12px;
+    padding: 12px 18px;
+    background-color: #8b7cff;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.formulario-consulta button:hover {
+    background-color: #9b8cff;
+}
+
+.formulario-consulta .mensaje-exito {
+    padding: 14px;
+    background-color: #064e3b;
+    color: #d1fae5;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.formulario-consulta .mensaje-error {
+    padding: 14px;
+    background-color: #7f1d1d;
+    color: #fee2e2;
+    border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+    .formulario-consulta {
+        margin: 24px 12px;
+        padding: 20px;
     }
 }

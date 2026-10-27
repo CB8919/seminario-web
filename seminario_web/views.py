@@ -1,3 +1,6 @@
+import html
+import re
+
 from django.contrib.auth import logout
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -6,10 +9,24 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Favorito
+from django.utils.html import strip_tags
+from .models import Favorito, Consulta
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 from django.views.decorators.http import require_POST
+
+
+def limpiar_sinopsis(description):
+    if not isinstance(description, str):
+        return ''
+
+    description = re.sub(
+        r'<\s*br\s*/?\s*>|</\s*(?:p|div|li|h[1-6])\s*>',
+        '\n',
+        description,
+        flags=re.IGNORECASE,
+    )
+    return html.unescape(strip_tags(description)).strip()
 
 
 
@@ -66,7 +83,11 @@ def obtener_animes(page=1):
 
         r.raise_for_status()
 
-        return r.json()['data']['Page']['media'], None
+        animes = r.json()['data']['Page']['media']
+        for anime in animes:
+            anime['description'] = limpiar_sinopsis(anime.get('description'))
+
+        return animes, None
 
     except (requests.RequestException, KeyError):
         return [], 'No se pudo cargar la lista de animes.'
@@ -137,3 +158,34 @@ def eliminar_usuario(request, user_id):
         usuario.delete()
 
     return redirect('listar_usuarios')
+
+
+@login_required
+def enviar_consulta(request):
+    if request.method == 'POST':
+        asunto = request.POST.get('asunto', '').strip()
+        mensaje = request.POST.get('mensaje', '').strip()
+
+        asuntos_validos = [
+            'Consulta sobre la web',
+            'Problema con mi cuenta',
+            'Sugerencia',
+            'Otro',
+        ]
+
+        if asunto not in asuntos_validos or not mensaje:
+            return render(request, 'consulta.html', {
+                'error': 'Completá el asunto y el mensaje correctamente.',
+            })
+
+        Consulta.objects.create(
+            usuario=request.user,
+            asunto=asunto,
+            mensaje=mensaje,
+        )
+
+        return render(request, 'registration/consulta.html', {
+            'enviado': True,
+        })
+
+    return render(request, 'registration/consulta.html')

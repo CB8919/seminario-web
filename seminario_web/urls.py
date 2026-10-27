@@ -11,6 +11,6 @@ urlpatterns = [
     path('cerrar-sesion-navegador/', views.cerrar_sesion_navegador, name='cerrar_sesion_navegador'),
     path('usuarios/', views.listar_usuarios, name = 'listar_usuarios'),
     path('usuarios/eliminar/<int:user_id>/', views.eliminar_usuario, name = 'eliminar_usuario'),
-    
+    path('consulta/', views.enviar_consulta, name='consulta'),
     
 ]

@@ -1,0 +1,46 @@
+
+{% extends 'base.html' %}
+
+{% block titulo %}Enviar consulta - AnimeWeb{% endblock %}
+
+{% block contenido %}
+<section class="formulario-consulta">
+    <h1>Contactanos</h1>
+    <p>Dejanos tu consulta, problema o sugerencia.</p>
+
+    {% if enviado %}
+        <p class="mensaje-exito">
+            Tu consulta se envió correctamente.
+        </p>
+    {% else %}
+        {% if error %}
+            <p class="mensaje-error">{{ error }}</p>
+        {% endif %}
+
+        <form method="post" action="{% url 'consulta' %}">
+            {% csrf_token %}
+
+            <label for="asunto">Asunto</label>
+            <select id="asunto" name="asunto" required>
+                <option value="">Seleccioná un asunto</option>
+                <option value="Consulta sobre la web">Consulta sobre la web</option>
+                <option value="Problema con mi cuenta">Problema con mi cuenta</option>
+                <option value="Sugerencia">Sugerencia</option>
+                <option value="Otro">Otro</option>
+            </select>
+
+            <label for="mensaje">Mensaje</label>
+            <textarea
+                id="mensaje"
+                name="mensaje"
+                rows="6"
+                maxlength="5000"
+                placeholder="Escribí tu consulta..."
+                required
+            ></textarea>
+
+            <button type="submit">Enviar consulta</button>
+        </form>
+    {% endif %}
+</section>
+{% endblock %}
