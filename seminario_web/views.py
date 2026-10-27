@@ -2,11 +2,14 @@ from django.contrib.auth import logout
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import requests
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Favorito
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.models import User
+from django.views.decorators.http import require_POST
 
 
 
@@ -119,3 +122,18 @@ def cerrar_sesion_navegador(request):
         return JsonResponse({'ok': True})
 
     return JsonResponse({'ok': False}, status=405)
+
+@staff_member_required
+def listar_usuarios(request):
+    usuarios = User.objects.all()
+    return render(request, 'registration/usuarios.html', {'usuarios': usuarios})
+
+@staff_member_required
+@require_POST
+def eliminar_usuario(request, user_id):
+    usuario = get_object_or_404(User, id=user_id)
+
+    if usuario != request.user:
+        usuario.delete()
+
+    return redirect('listar_usuarios')

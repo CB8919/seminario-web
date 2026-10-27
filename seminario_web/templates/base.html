@@ -24,40 +24,53 @@
 <body>
 
     <header class="navbar">
-        <div class="navbar-contenido">
+    <div class="navbar-contenido">
 
-            <a class="logo" href="{% url 'inicio' %}">
-                Anime<span>Web</span>
-            </a>
+        <a class="logo" href="{% url 'inicio' %}">
+            Anime<span>Web</span>
+        </a>
 
-            <nav class="nav-links">
-                <a href="{% url 'inicio' %}">Inicio</a>
-
-                {% if user.is_authenticated %}
-                    <a href="{% url 'favoritos' %}">Mis favoritos</a>
-                {% else %}
-                    <a href="{% url 'login' %}">Ingresar</a>
-                    <a href="{% url 'registro' %}">Registrarse</a>
-                {% endif %}
-            </nav>
+        <nav id="menu-navegacion" class="nav-links">
+            <a href="{% url 'inicio' %}">Inicio</a>
 
             {% if user.is_authenticated %}
-                <div class="usuario">
+                <a href="{% url 'favoritos' %}">Mis favoritos</a>
 
-                    <span>Hola, {{ user.username }}</span>
+                {% if user.is_staff %}
+                    <a href="{% url 'listar_usuarios' %}">Usuarios registrados</a>
+                    
+                {% endif %}
 
-                    <form method="post" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-secundario">
-                            Cerrar sesión
-                        </button>
-                    </form>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-secundario">
+                        Cerrar sesión
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Ingresar</a>
+                <a href="{% url 'registro' %}">Registrarse</a>
+            {% endif %}
+        </nav>
 
-                </div>
+        <div class="usuario">
+            {% if user.is_authenticated %}
+                <span>Hola, {{ user.username }}</span>
             {% endif %}
 
+            <button
+                type="button"
+                class="menu-toggle"
+                id="menu-toggle"
+                aria-label="Abrir menú"
+                aria-controls="menu-navegacion"
+                aria-expanded="false">
+                ☰
+            </button>
         </div>
-    </header>
+
+    </div>
+</header>
 
 
     <main class="contenedor">
@@ -72,5 +85,6 @@
         <p>AnimeWeb · Seminario</p>
     </footer>
 
+    <script src="{% static 'menuhambur.js' %}" defer></script>
 </body>
 </html>

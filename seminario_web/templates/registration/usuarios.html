@@ -1,0 +1,38 @@
+{% extends "base.html"%}
+
+{% block titulo %} Usuarios registrados {% endblock%}
+
+{% block contenido%}
+
+<h1> Usuarios registrados </h1>
+
+<table class="tabla-usuarios">
+    <thead>
+        <tr>
+            <th>Nombre de usuario</th>
+            <th>Fecha de registro</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.username }}</td>
+            <td>{{ usuario.date_joined|date:"d/m/Y" }}</td>
+            <td>
+                <form method="post" action="{% url 'eliminar_usuario' usuario.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-eliminar-usuario">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No hay usuarios registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+<!--{% url 'eliminar_usuario' usuario.id %}-->

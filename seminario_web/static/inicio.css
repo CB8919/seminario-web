@@ -647,11 +647,6 @@ a {
     }
 
 
-    .usuario span {
-        display: none;
-    }
-
-
     .nav-links {
         gap: 15px;
     }
@@ -679,4 +674,116 @@ a {
         padding: 20px;
     }
 
+}
+
+
+
+/* =========================
+   MENU HAMBURGUESA
+   ========================= */
+
+.menu-toggle {
+    display: none;
+}
+
+.nav-links form {
+    margin: 0;
+}
+
+@media (max-width: 800px) {
+    .navbar-contenido {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .usuario {
+        margin-left: auto;
+        gap: 10px;
+    }
+
+    .menu-toggle {
+        display: block;
+        border: none;
+        background: transparent;
+        color: #ffffff;
+        font-size: 26px;
+        cursor: pointer;
+    }
+
+    .nav-links {
+        display: none;
+        order: 3;
+        flex-basis: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+        padding: 12px 0;
+    }
+
+    .nav-links.menu-abierto {
+        display: flex;
+    }
+
+    .nav-links form button {
+        width: auto;
+    }
+}
+
+/* Tabla de usuarios registrados */
+.tabla-usuarios {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    background-color: #1e293b;
+    color: #f1f5f9;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tabla-usuarios th,
+.tabla-usuarios td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid #334155;
+}
+
+.tabla-usuarios th {
+    background-color: #0f172a;
+    color: #22d3ee;
+    font-weight: 600;
+}
+
+.tabla-usuarios tbody tr:hover {
+    background-color: #273449;
+}
+
+.tabla-usuarios tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.btn-eliminar-usuario {
+    background-color: #dc2626;
+    color: #ffffff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-eliminar-usuario:hover {
+    background-color: #b91c1c;
+}
+
+@media (max-width: 600px) {
+    .tabla-usuarios th,
+    .tabla-usuarios td {
+        padding: 10px 8px;
+        font-size: 14px;
+    }
+
+    .btn-eliminar-usuario {
+        padding: 7px 10px;
+        font-size: 13px;
+    }
 }
