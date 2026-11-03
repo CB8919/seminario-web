@@ -1,6 +1,5 @@
 import html
 import re
-from rest_framework.authtoken.models import Token
 from django.contrib.auth import logout
 from django.http import JsonResponse
 import requests
@@ -148,8 +147,6 @@ def cerrar_sesion_navegador(request):
 def listar_usuarios(request):
     usuarios = User.objects.all()
 
-    for usuario in usuarios:
-        usuario.token = Token.objects.get_or_create(user = usuario)[0]
         
     return render(request, 'registration/usuarios.html', {'usuarios': usuarios})
 
