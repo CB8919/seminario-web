@@ -1,3 +1,4 @@
+/* Estilos globales compartidos por base.html y sus templates hijos: INICIO */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -19,11 +20,10 @@ body {
 a {
     color: inherit;
 }
+/* Estilos globales compartidos por base.html y sus templates hijos: FIN */
 
 
-/* =========================
-   NAVBAR
-   ========================= */
+/* base.html - barra de navegacion: INICIO */
 
 .navbar {
     background: #17182d;
@@ -121,11 +121,10 @@ a {
 .usuario form {
     margin: 0;
 }
+/* base.html - barra de navegacion: FIN */
 
 
-/* =========================
-   CONTENEDOR
-   ========================= */
+/* base.html y templates hijos - contenedor principal y titulos de seccion: INICIO */
 
 .contenedor {
     width: min(1200px, calc(100% - 40px));
@@ -152,11 +151,10 @@ a {
 .seccion-titulo p {
     color: #999bb1;
 }
+/* base.html y templates hijos - contenedor principal y titulos de seccion: FIN */
 
 
-/* =========================
-   MENSAJES
-   ========================= */
+/* inicio.html y registration/consulta.html - mensajes de error: INICIO */
 
 .mensaje-error {
     background: #3a1e2a;
@@ -171,11 +169,10 @@ a {
 
     margin-bottom: 24px;
 }
+/* inicio.html y registration/consulta.html - mensajes de error: FIN */
 
 
-/* =========================
-   PORTADA
-   ========================= */
+/* inicio.html - portada para usuarios no autenticados: INICIO */
 
 .inicio-portada {
     max-width: 900px;
@@ -211,11 +208,10 @@ a {
 
     text-align: left;
 }
+/* inicio.html - portada para usuarios no autenticados: FIN */
 
 
-/* =========================
-   CARDS
-   ========================= */
+/* inicio.html, registration/login.html, registration/registro.html y nosotros.html - tarjetas: INICIO */
 
 .auth-card,
 .form-card {
@@ -235,11 +231,10 @@ a {
 .form-card h1 {
     margin-bottom: 22px;
 }
+/* inicio.html, registration/login.html, registration/registro.html y nosotros.html - tarjetas: FIN */
 
 
-/* =========================
-   FORMULARIOS
-   ========================= */
+/* inicio.html, registration/login.html y registration/registro.html - formularios: INICIO */
 
 .formulario p {
     margin-bottom: 16px;
@@ -302,11 +297,10 @@ a {
 
     font-size: 13px;
 }
+/* inicio.html, registration/login.html y registration/registro.html - formularios: FIN */
 
 
-/* =========================
-   BOTONES
-   ========================= */
+/* Botones compartidos por base.html, inicio.html, favoritos.html y formularios: INICIO */
 
 .btn {
     border: 0;
@@ -351,11 +345,10 @@ a {
 
     color: white;
 }
+/* Botones compartidos por base.html, inicio.html, favoritos.html y formularios: FIN */
 
 
-/* =========================
-   ANIMES
-   ========================= */
+/* inicio.html y favoritos.html - tarjetas y grilla de animes: INICIO */
 
 .anime-grilla {
     display: grid;
@@ -448,10 +441,9 @@ a {
 .anime-info .btn + .btn {
     margin-top: 8px;
 }
+/* inicio.html y favoritos.html - tarjetas y grilla de animes: FIN */
 
-/* =========================
-   LOGIN / REGISTRO
-   ========================= */
+/* registration/login.html y registration/registro.html: INICIO */
 
 .form-page {
     width: min(460px, 100%);
@@ -479,9 +471,9 @@ a {
 .form-page a:hover {
     text-decoration: underline;
 }
-/* =========================
-    PAGINACION
-   ========================= */
+/* registration/login.html y registration/registro.html: FIN */
+
+/* inicio.html - paginacion de animes: INICIO */
 .paginacion {
     display: flex;
     justify-content: center;
@@ -508,10 +500,9 @@ a {
 
     font-size: 13px;
 }
+/* inicio.html - paginacion de animes: FIN */
 
-/* =========================
-    MODAL
-   ========================= */
+/* inicio.html - modal con la sinopsis de cada anime: INICIO */
 .modal-sinopsis {
     position: fixed;
     top: 0;
@@ -577,9 +568,9 @@ a {
 .modal-cerrar:hover {
     color: #999bb1;
 }
-/* =========================
-   FOOTER
-   ========================= */
+/* inicio.html - modal con la sinopsis de cada anime: FIN */
+
+/* base.html - pie de pagina compartido: INICIO */
 
 .footer {
     border-top: 1px solid #292a48;
@@ -592,11 +583,10 @@ a {
 
     font-size: 13px;
 }
+/* base.html - pie de pagina compartido: FIN */
 
 
-/* =========================
-   TABLET
-   ========================= */
+/* base.html y templates hijos - ajustes de navegacion y portada para tablet: INICIO */
 
 @media (max-width: 800px) {
 
@@ -628,11 +618,10 @@ a {
     }
 
 }
+/* base.html y templates hijos - ajustes de navegacion y portada para tablet: FIN */
 
 
-/* =========================
-   CELULAR
-   ========================= */
+/* base.html y templates hijos - ajustes de navegacion, animes y tarjetas para celular: INICIO */
 
 @media (max-width: 520px) {
 
@@ -676,12 +665,11 @@ a {
     }
 
 }
+/* base.html y templates hijos - ajustes de navegacion, animes y tarjetas para celular: FIN */
 
 
 
-/* =========================
-   MENU HAMBURGUESA
-   ========================= */
+/* base.html - menu hamburguesa y navegacion movil: INICIO */
 
 .menu-toggle {
     display: none;
@@ -729,8 +717,9 @@ a {
         width: auto;
     }
 }
+/* base.html - menu hamburguesa y navegacion movil: FIN */
 
-/* Tabla de usuarios registrados */
+/* registration/usuarios.html - tabla de usuarios registrados: INICIO */
 .tabla-usuarios {
     width: 100%;
     border-collapse: collapse;
@@ -788,8 +777,9 @@ a {
         font-size: 13px;
     }
 }
+/* registration/usuarios.html - tabla de usuarios registrados: FIN */
 
-/* Formulario de consultas */
+/* registration/consulta.html - formulario de consultas: INICIO */
 .formulario-consulta {
     max-width: 650px;
     margin: 40px auto;
@@ -883,8 +873,9 @@ a {
         padding: 20px;
     }
 }
+/* registration/consulta.html - formulario de consultas: FIN */
 
-/* Página Nosotros */
+/* nosotros.html - contenido de la pagina Nosotros: INICIO */
 .nosotros-page {
     max-width: 800px;
     margin: 40px auto;
@@ -901,3 +892,4 @@ a {
     line-height: 1.7;
     margin-bottom: 15px;
 }
+/* nosotros.html - contenido de la pagina Nosotros: FIN */

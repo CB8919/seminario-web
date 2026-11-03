@@ -178,7 +178,7 @@ def enviar_consulta(request):
         ]
 
         if asunto not in asuntos_validos or not mensaje:
-            return render(request, 'consulta.html', {
+            return render(request, 'registration/consulta.html', {
                 'error': 'Completá el asunto y el mensaje correctamente.',
             })
 
