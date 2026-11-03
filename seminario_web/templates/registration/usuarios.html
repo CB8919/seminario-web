@@ -11,6 +11,7 @@
         <tr>
             <th>Nombre de usuario</th>
             <th>Fecha de registro</th>
+            
             <th>Acciones</th>
         </tr>
     </thead>
@@ -19,6 +20,7 @@
         <tr>
             <td>{{ usuario.username }}</td>
             <td>{{ usuario.date_joined|date:"d/m/Y" }}</td>
+            
             <td>
                 <form method="post" action="{% url 'eliminar_usuario' usuario.id %}">
                     {% csrf_token %}
@@ -35,4 +37,3 @@
 </table>
 {% endblock %}
 
-<!--{% url 'eliminar_usuario' usuario.id %}-->

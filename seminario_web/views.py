@@ -1,6 +1,6 @@
 import html
 import re
-
+from rest_framework.authtoken.models import Token
 from django.contrib.auth import logout
 from django.http import JsonResponse
 import requests
@@ -108,8 +108,8 @@ def inicio(request):
         }
     )
 
-
-@login_required # Sirve para que solo los usuarios autenticados puedan acceder a la vista
+# Sirve para que solo los usuarios autenticados puedan acceder a la vista
+@login_required 
 def agregra_favorito(request):
     if request.method == 'POST':
         Favorito.objects.get_or_create(
@@ -147,6 +147,10 @@ def cerrar_sesion_navegador(request):
 @staff_member_required
 def listar_usuarios(request):
     usuarios = User.objects.all()
+
+    for usuario in usuarios:
+        usuario.token = Token.objects.get_or_create(user = usuario)[0]
+        
     return render(request, 'registration/usuarios.html', {'usuarios': usuarios})
 
 @staff_member_required
@@ -189,3 +193,6 @@ def enviar_consulta(request):
         })
 
     return render(request, 'registration/consulta.html')
+
+def nosotros(request):
+    return render(request, 'nosotros.html')

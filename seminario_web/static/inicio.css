@@ -883,3 +883,21 @@ a {
         padding: 20px;
     }
 }
+
+/* Página Nosotros */
+.nosotros-page {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 25px;
+    color: #e2e8f0;
+}
+
+.nosotros-page h1 {
+    color: #8b7cff;
+    margin-bottom: 20px;
+}
+
+.nosotros-page p {
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
