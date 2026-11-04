@@ -327,7 +327,7 @@ a {
 
 
 .btn-principal {
-    background: #8b7cff;
+    background: #9b8cff;
 
     color: white;
 }
@@ -403,15 +403,12 @@ a {
 
 .anime-info h3 {
     font-size: 15px;
-
     line-height: 1.3;
-
     margin-bottom: 8px;
-
+    min-height: 39px;
     display: -webkit-box;
-    /*-webkit-line-clamp: 2;*/
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-
     overflow: hidden;
 }
 
@@ -426,7 +423,10 @@ a {
 
 
 .anime-info form {
-    margin-top: auto;          /* Agregado: empuja el formulario/botones al fondo */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: auto;
 }
 
 
@@ -440,6 +440,16 @@ a {
 
 .anime-info .btn + .btn {
     margin-top: 8px;
+}
+.anime-info form a.btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+.anime-info form .btn:hover:not(:disabled) {
+    text-decoration: none;
+    background-color: #7a6be0;
 }
 /* inicio.html y favoritos.html - tarjetas y grilla de animes: FIN */
 

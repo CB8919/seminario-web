@@ -75,7 +75,7 @@
                                 >
 
                                 <button
-                                    class="btn btn-principal"
+                                    class="btn btn-secundario"
                                     type="submit"
                                 >
                                     Agregar a favoritos
@@ -87,6 +87,26 @@
                                 >
                                     Sinopsis
                                 </button>
+
+                                {% if anime.trailer.id and anime.trailer.site == "youtube" %}
+                                <a
+                                    class="btn btn-secundario btn-trailer"
+                                    href="https://www.youtube.com/watch?v={{ anime.trailer.id }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Ver tráiler
+                                </a>
+
+                                {% else %}
+                                <button
+                                    type="button"
+                                    class="btn btn-secundario btn-trailer"
+                                    disabled
+                                >
+                                    Tráiler no disponible
+                                </button>
+                                {% endif %}
 
                             </form>
 

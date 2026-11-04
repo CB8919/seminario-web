@@ -12,7 +12,14 @@ from .models import Favorito, Consulta
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 from django.views.decorators.http import require_POST
+from django import forms
 
+
+
+class ActualizarUsuarioForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username']
 
 def limpiar_sinopsis(description):
     if not isinstance(description, str):
@@ -27,7 +34,7 @@ def limpiar_sinopsis(description):
     return html.unescape(strip_tags(description)).strip()
 
 
-
+# Función para manejar el registro de usuarios
 
 def registro(request):
     if request.method == 'POST':
@@ -40,29 +47,55 @@ def registro(request):
         form = UserCreationForm()
     return render(request, 'registration/registro.html', {'form': form})
 
+@login_required
+def actualizar_usuario(request):
+    if request.method == 'POST':
+        form = ActualizarUsuarioForm(
+            request.POST,
+            instance=request.user
+        )
+
+        if form.is_valid():
+            form.save()
+            return redirect('inicio')
+    else:
+        form = ActualizarUsuarioForm(instance=request.user)
+
+    return render(
+        request,
+        'registration/actualizar_usuario.html',
+        {'form': form}
+    )
+
+# Función para obtener los animes desde la API de Anilist
 
 def obtener_animes(page=1):
     query = """
-    query ($page: Int, $perPage: Int) {
-      Page(page: $page, perPage: $perPage) {
-        media(
-          type: ANIME,
-          status: RELEASING,
-          sort: TRENDING_DESC
-        ) {
-          id
-          title {
-            romaji
-          }
-          coverImage {
-            large
-          }
-          episodes
-          description(asHtml: false)
-        }
+query ($page: Int, $perPage: Int) {
+  Page(page: $page, perPage: $perPage) {
+    media(
+      type: ANIME,
+      status: RELEASING,
+      sort: TRENDING_DESC
+    ) {
+      id
+      title {
+        romaji
+      }
+      coverImage {
+        large
+      }
+      episodes
+      description(asHtml: false)
+      trailer {
+        id
+        site
+        thumbnail
       }
     }
-    """
+  }
+}
+"""
 
     variables = {
         "page": page,
@@ -90,6 +123,8 @@ def obtener_animes(page=1):
     except (requests.RequestException, KeyError):
         return [], 'No se pudo cargar la lista de animes.'
 
+# Vista para la página de inicio, que muestra los animes obtenidos desde la API de Anilist
+
 def inicio(request):
     animes, error = [], None
 
@@ -107,7 +142,7 @@ def inicio(request):
         }
     )
 
-# Sirve para que solo los usuarios autenticados puedan acceder a la vista
+# Vista para agregar un anime a los favoritos del usuario autenticado
 @login_required 
 def agregra_favorito(request):
     if request.method == 'POST':
@@ -127,6 +162,8 @@ def mis_favoritos(request):
     favoritos = Favorito.objects.filter(user = request.user)
     return render(request, 'favoritos.html', {'favoritos': favoritos})
 
+
+# Vista para quitar un anime de los favoritos del usuario autenticado
 @login_required
 def quitar_favorito(request, anime_id):
     if request.method == 'POST':
@@ -134,6 +171,7 @@ def quitar_favorito(request, anime_id):
     return redirect('favoritos')
 
 
+# Vista para cerrar la sesión del usuario autenticado y devolver una respuesta JSON
 @require_POST
 @login_required
 def cerrar_sesion_navegador(request):
@@ -143,6 +181,7 @@ def cerrar_sesion_navegador(request):
 
     return JsonResponse({'ok': False}, status=405)
 
+# Vista para listar todos los usuarios registrados, accesible solo para miembros del personal
 @staff_member_required
 def listar_usuarios(request):
     usuarios = User.objects.all()
@@ -150,6 +189,7 @@ def listar_usuarios(request):
         
     return render(request, 'registration/usuarios.html', {'usuarios': usuarios})
 
+# Vista para eliminar un usuario, accesible solo para miembros del personal
 @staff_member_required
 @require_POST
 def eliminar_usuario(request, user_id):
@@ -160,7 +200,7 @@ def eliminar_usuario(request, user_id):
 
     return redirect('listar_usuarios')
 
-
+# Vista para enviar consultas, accesible solo para usuarios autenticados
 @login_required
 def enviar_consulta(request):
     if request.method == 'POST':
@@ -191,5 +231,6 @@ def enviar_consulta(request):
 
     return render(request, 'registration/consulta.html')
 
+# Vista para la página "Nosotros"
 def nosotros(request):
     return render(request, 'nosotros.html')

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Mi cuenta | AnimeWeb{% endblock %}
+
+{% block contenido %}
+
+<section class="formulario-container">
+
+    <h1>Mi cuenta</h1>
+
+    <form method="post" class="formulario">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-principal">
+            Actualizar nombre de usuario
+        </button>
+
+    </form>
+
+</section>
+
+{% endblock %}

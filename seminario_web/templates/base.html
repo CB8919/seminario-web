@@ -9,7 +9,7 @@
     <title>{% block titulo %}AnimeWeb{% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'inicio.css' %}">
-    <script src="{% static 'sesion.js' %}" defer></script>
+    <!--<script src="{% static 'sesion.js' %}" defer></script>-->
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HQGBH0G9SP"></script>
     <script>
@@ -41,6 +41,10 @@
                 <a href="{% url 'consulta' %}">Contactanos</a>
 
                 <a href="{% url 'nosotros' %}">Nosotros</a>
+
+                <a href="{% url 'actualizar_usuario' %}">Mi cuenta</a>
+
+                <a href="{% url 'cambiar_password' %}">Cambiar contraseña</a>
 
                 {% if user.is_staff %}
                     <a href="{% url 'listar_usuarios' %}">Usuarios registrados</a>
