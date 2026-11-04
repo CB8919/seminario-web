@@ -30,7 +30,7 @@
             Anime<span>Web</span>
         </a>
 
-        <nav id="menu-navegacion" class="nav-links">
+        <nav id="menu-navegacion" class="nav-links {% if user.is_staff %}nav-admin{% endif %}">
 
             {% if user.is_authenticated %}
                 <a href="{% url 'inicio' %}">Inicio</a>

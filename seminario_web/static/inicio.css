@@ -83,8 +83,18 @@ a {
 
     flex: 1;
 }
+.nav-admin {
+    gap: 16px;
+}
 
-
+.nav-admin a {
+    white-space: nowrap;
+}
+.nav-admin form .btn-secundario {
+    white-space: nowrap;
+    padding: 9px 12px;
+    font-size: 13px;
+}
 .nav-links a {
     color: #c9c9d8;
 
